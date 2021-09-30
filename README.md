@@ -8,7 +8,7 @@ Create a newtwok with the name wldnet and with bridge driver
 `mongodb/data/node1, mongodb/data/node2, mongodb/data/node3, mongodb/log/node1, mongodb/log/node2, mongodb/log/node3`
 2. create **mongod.log** file in log directory
 `mongodb/log/node1/mongod.log, mongodb/log/node2/mongod.log, mongodb/log/node3/mongod.log`
-3. Make mongod user as the owner for mongodb directory
+3. Make **mongod** user as the owner for mongodb directory
 `sudo chown -R mongod:mongod $HOME/mongodb`
 Go to **mongo-docker-compose** package and run docker-compose up command
 ```
