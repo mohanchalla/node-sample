@@ -1,0 +1,23 @@
+version: "3"
+services:
+  node:
+    hostname: node
+    container_name: node
+    image: test/node-app:1.0.0
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    restart: on-failure
+    volumes:
+      - ./models:/opt/node-app/models
+      - ./node_modules:/opt/node-app/node_modules
+      - ./public:/opt/node-app/public
+      - ./schema:/opt/node-app/schema
+      - ./views:/opt/node-app/views
+      - ./package.json:/opt/node-app/package.json
+      - ./server.js:/opt/node-app/server.js
+networks:
+  default:
+    external: true
+    name: wldnet

@@ -1,0 +1,55 @@
+version: "3"
+services:
+  mongo1:
+    hostname: db1
+    container_name: db1
+    image: mongo:5.0.3
+    expose:
+      - 27001
+    ports:
+      - 27001:27001
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--config", "/conf/mogodb.conf" ]
+    volumes:
+      - $HOME/mongodb/data/node1:/data/db # This is where your volume will persist. e.g. VOLUME-DIR = ./volumes/mongodb
+      - $HOME/mongodb/log/node1/mongod.log:/var/log/mongod.log
+      - $HOME/mongodb/data/node1/configdb:/data/configdb
+      - ./conf/node1.conf:/conf/mogodb.conf
+      - ./keyfile/mongo-keyfile:/conf/keyfile
+      - ./scripts:/scripts
+  mongo2:
+    hostname: db2
+    container_name: db2
+    image: mongo:5.0.3
+    expose:
+      - 27002
+    ports:
+      - 27002:27002
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--config", "/conf/mogodb.conf" ]
+    volumes:
+      - $HOME/mongodb/data/node2:/data/db # Note the data2, it must be different to the original set.
+      - $HOME/mongodb/log/node2/mongod.log:/var/log/mongod.log
+      - $HOME/mongodb/data/node2/configdb:/data/configdb
+      - ./conf/node2.conf:/conf/mogodb.conf
+      - ./keyfile/mongo-keyfile:/conf/keyfile
+  mongo3:
+    hostname: db3
+    container_name: db3
+    image: mongo:5.0.3
+    expose:
+      - 27003
+    ports:
+      - 27003:27003
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--config", "/conf/mogodb.conf" ]
+    volumes:
+      - $HOME/mongodb/data/node3:/data/db
+      - $HOME/mongodb/log/node3/mongod.log:/var/log/mongod.log
+      - $HOME/mongodb/data/node3/configdb:/data/configdb
+      - ./conf/node3.conf:/conf/mogodb.conf
+      - ./keyfile/mongo-keyfile:/conf/keyfile
+networks:
+  default:
+    external: true
+    name: wldnet
