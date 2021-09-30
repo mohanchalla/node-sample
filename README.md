@@ -1,7 +1,9 @@
 # node-sample
 **Step 1:**
+
 Create a newtwok with the name wldnet and with bridge driver
 **Step 2:**
+
 1. create a folder **mongodb** in your home directory, under that create the subdirectories like this
 `mongodb/data/node1, mongodb/data/node2, mongodb/data/node3, mongodb/log/node1, mongodb/log/node2, mongodb/log/node3`
 2. create **mongod.log** file in log directory
