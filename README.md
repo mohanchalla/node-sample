@@ -1,4 +1,4 @@
-# node-sample
+# Steps to run node-sample app run locally
 **Step 1:**
 
 Create a newtwok with the name wldnet and with bridge driver
