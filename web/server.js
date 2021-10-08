@@ -5,18 +5,23 @@ const mongoose = require('mongoose')
 const app = express()
 const port = 3000
 const { graphqlHTTP } = require("express-graphql")
-const schema = require('./schema/schema')
-
+const { schema, resolvers } = require('./schema/schema.js');
 app.set('view engine', 'ejs')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static('public'))
+
+var root = {
+  status: () => 'Welcome to GraphQL'
+};
+
 // this makes graphql UI to be avialable via "/graphql"
 app.use(
   "/graphql",
   graphqlHTTP({
     schema: schema,
+    rootValue: resolvers,
     graphiql: true
   }));
 
@@ -24,8 +29,6 @@ const connectionString = 'mongodb://admin:admin@db1:27001,db2:27002,db3:27003/st
 mongoose.connect(connectionString, { useNewUrlParser: true })
 const db = mongoose.connection
 const Schema = mongoose.Schema
-
-const Quote = require('./models/Quote')
 
 db.once('open', _ => {
   console.log('Database connected')
